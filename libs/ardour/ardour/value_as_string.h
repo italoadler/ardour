@@ -55,6 +55,10 @@ value_as_string(const ARDOUR::ParameterDescriptor& desc,
 		snprintf(buf, sizeof(buf), desc.print_fmt.c_str(), v);
 	} else if (desc.integer_step) {
 		snprintf(buf, sizeof(buf), "%d", (int)v);
+	} else if (desc.upper - desc.lower >= 1000) {
+		snprintf(buf, sizeof(buf), "%.1f", v);
+	} else if (desc.upper - desc.lower >= 100) {
+		snprintf(buf, sizeof(buf), "%.2f", v);
 	} else {
 		snprintf(buf, sizeof(buf), "%.3f", v);
 	}
